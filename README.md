@@ -10,11 +10,7 @@ Containerized reverse proxy for running multiple containerized nginx server on o
 
 You may need to make the ./ssl/certs and ./ssl/private directories first!
 
-2. Build Docker Image
+2. Compose Docker Container
 
-`docker build -t nginx-reverse-proxy .`
-
-3. Run Docker Container
-
-`docker run -d --name reverse-proxy -p 443:443 nginx-reverse-proxy `
+`docker compose up`
 
