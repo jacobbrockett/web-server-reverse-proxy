@@ -1,5 +1,5 @@
-# web-server-reverse-proxy
-Containerized reverse proxy for running multiple containerized nginx server on one AWS EC2 instance.
+# Web Server Reverse Proxy
+Containerized reverse proxy for running multiple containerized nginx servers on one AWS EC2 instance.
 
 ## Docker
 1. Generate Keys and Certs
