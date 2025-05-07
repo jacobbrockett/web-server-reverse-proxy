@@ -28,18 +28,16 @@ jobs:
         run: |
           cat $GITHUB_WORKSPACE/default.conf
 
-      - name: Save secret to .pem file
-        run: | 
-          echo $PRIVATE_KEY > private-key.pem
-          cat private-key.pem
-        env:
-          PRIVATE_KEY: ${{ secrets.WEBSERVER_CONTAINERS_EC2_KEY }}
+      - name: Create private key file
+        run: |
+          echo "${{ secrets.WEBSERVER_CONTAINERS_EC2_KEY }}" > private-key.pem
+          sudo chmod 600 private-key.pem
 
-      - name: Add EC2 host to known_hosts
+      - name: Add host to known_hosts
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H ec2-18-224-18-112.us-east-2.compute.amazonaws.com >> ~/.ssh/known_hosts
-      
+
       - name: SSH into EC2 and run command
         run: |
           chmod 600 private-key.pem
