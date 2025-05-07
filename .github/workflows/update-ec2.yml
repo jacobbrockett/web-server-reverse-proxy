@@ -25,14 +25,18 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Check workspace file location
-        run: cat $GITHUB_WORKSPACE/default.conf
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          cat $GITHUB_WORKSPACE/default.conf
+
+      - name: Save secret to .pem file
+        run: | 
+          echo $PRIVATE_KEY > private-key.pem
+        env:
+          PRIVATE_KEY: ${{ secrets.WEBSERVER_CONTAINERS_EC2_KEY }}
+
+      - name: Test connection to remote ec2 server
+        run: | 
+          ssh -i "private-key.pem" ubuntu@ec2-18-224-18-112.us-east-2.compute.amazonaws.com
+          cat /home/ubuntu/test-ssh
+          exit
+      
