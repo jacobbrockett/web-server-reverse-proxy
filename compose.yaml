@@ -1,6 +1,6 @@
 services:
   reverse-proxy:
-    image: .
+    image: ./
     container_name: reverse-proxy
     hostname: reverse-proxy
     ports:
