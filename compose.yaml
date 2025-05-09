@@ -1,6 +1,8 @@
 services:
   reverse-proxy:
     image: nginx:alpine
+    container_name: reverse-proxy
+    hostname: reverse-proxy
     ports:
       - "443:443"
       - "80:80"
@@ -32,3 +34,9 @@ services:
         source: ./snippets/ssl-params.conf
         target: /etc/nginx/snippets/ssl-params.conf
         read_only: true
+    networks:
+      - web-network
+
+networks:
+  web-network:
+    external: true
